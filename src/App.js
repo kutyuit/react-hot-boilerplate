@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-
-let obj = {
-  name: 'a',
-  age: 24
-}
+import { Link, IndexLink } from 'react-router';
 
 export default class App extends Component {
-  checkLog() {
-    return {
-      ...obj,
-      address: 'abc'
-    }
-    // return Object.assign({}, obj, {address: 'def'});
-  }
   render() {
-    let entry = this.checkLog();
-    console.log(entry, JSON.stringify(entry));
     return (
-      <h1>Hello, world. {JSON.stringify(entry) + ' ; ' + Object.assign}</h1>
+      <div>
+        <ul>
+          {/* <li><Link to="/" activeStyle={{color: 'green'}} onlyActiveOnIndex={true}>Home</Link></li> */}
+          <li><IndexLink to="/" activeStyle={{color: 'green'}}>Home</IndexLink></li>
+          <li>
+            <Link to="/content1" activeStyle={{color: 'green'}}>Content 1</Link>
+            <ul>
+              <li><Link to="/content1/child1">Child 1</Link></li>
+            </ul>
+          </li>
+          <li><Link to="/content2" activeStyle={{color: 'green'}}>Content 2</Link></li>
+        </ul>
+        {this.props.children}
+      </div>
     );
   }
 }
